@@ -12,7 +12,16 @@
 
 #def home():
     #return "Hola mundo luis!"
-
+movies =[
+    {
+        "id":1,
+        "title": "Avatar",
+        "overview" : "En el exuberante planeta llamado Pandora ...",
+        "year":"2009",
+        "rating":7.8,
+        "category":"Acción"
+    }
+]
 
 from typing import Union
 
@@ -37,7 +46,8 @@ def read_root():
 
 @app.get('/movies',tags=['Home'])
 def home():
-    return HTMLResponse('<h1>Hola Luis</h1>')
+    #return HTMLResponse('<h1>Hola Luis</h1>')
+    return movies 
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
