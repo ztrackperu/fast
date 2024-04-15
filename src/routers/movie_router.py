@@ -22,7 +22,7 @@ def get_movie(id:int=Path(gt=0))->Movie | dict:
 
 
 
-@movie_router.get('/by_category',tags=['Movies'])
+@movie_router.get('/by_category/',tags=['Movies'])
 def get_movie_by_category(category:str = Query(min_length=5,max_length=20))->Movie | dict:
     for movie in movies :
         if movie.category==category:
