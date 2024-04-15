@@ -42,6 +42,8 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 #para usar opcional 
 from typing import Optional,List
+#importar manejador de fechas 
+import datetime
 
 app = FastAPI()
 
@@ -61,10 +63,13 @@ class Movie(BaseModel):
 class MovieCreate(BaseModel):
     id:int
     title:str=Field(min_length=5,max_length=15)
-    overview:str
-    year:int
+    overview:str =Field(min_length=15,max_length=58)
+    #año menor o igual al año actual y menor igual a 1900
+    year:int = Field(le=datetime.date.today().year,ge=1900)
     rating:float 
     category:str
+
+#para validar numeros 
 
 class MovieUpdate(BaseModel):
     #modelo pa actualizar
