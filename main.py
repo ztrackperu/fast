@@ -22,6 +22,7 @@ movies =[
         "category":"Acción"
     }
 ]
+#los parametros ruta son valores que podemos pasar por la url
 
 from typing import Union
 
@@ -43,11 +44,16 @@ class Item(BaseModel):
 def read_root():
     return {"Hello": "World"}
 
-
+# el parametro tiene que ir en llaves 
 @app.get('/movies',tags=['Home'])
-def home():
+def get_movies():
     #return HTMLResponse('<h1>Hola Luis</h1>')
     return movies 
+
+@app.get('/movies/{id}',tags=['Home'])
+def get_movie():
+    #return HTMLResponse('<h1>Hola Luis</h1>')
+    return id 
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
