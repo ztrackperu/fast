@@ -20,7 +20,7 @@
 
 from typing import Union
 
-from fastapi import FastAPI ,Body
+from fastapi import FastAPI ,Body,Path
 from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse
@@ -30,6 +30,8 @@ from pydantic import BaseModel
 from typing import Optional,List
 #importar manejador de fechas 
 import datetime
+# dependencias para validar parametros
+
 
 app = FastAPI()
 
@@ -106,18 +108,21 @@ def get_movies()->List[Movie]:
 
 
 @app.get('/movies/{id}',tags=['Movies'])
-def get_movie(id:int)->Movie:
+#hago una validacion con el path
+#para validar que el id ingresado sea mayor a 0
+def get_movie(id:int=Path(ge=0))->Movie:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return id 
     #recorrer la lista y mostrar la que le id se parece 
     for movie in movies :
-        if movie['id']==id:
+        #if movie['id']==id:
+        if movie.id==id:
             return movie.model_dump()      
-    return []
+    return {}
 
 
 @app.get('/movies/',tags=['Movies'])
-def get_movie_by_category(category:str,year :int)->Movie:
+def get_movie_by_category(category:str,year :int)->Movie | dict:
     #return category 
     for movie in movies :
         #comparamos el parametro con la query
