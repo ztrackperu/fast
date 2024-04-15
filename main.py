@@ -23,7 +23,7 @@ from typing import Union
 from fastapi import FastAPI ,Body,Path,Query
 from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
-from fastapi.responses import HTMLResponse ,JSONResponse,PlainTextResponse,RedirectResponse
+from fastapi.responses import HTMLResponse ,JSONResponse,PlainTextResponse,RedirectResponse,FileResponse
 # para realizar esquemas importamos pydantic
 from pydantic import BaseModel
 #para usar opcional 
@@ -146,9 +146,9 @@ def create_movie(movie:MovieCreate)->List[Movie]:
     #return movies 
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
-    #return JSONResponse(content=content)
+    return JSONResponse(content=content)
     #303 es un aredireccion a nuestra propia aplicacion
-    return RedirectResponse('/movies',status_code=303)
+    #return RedirectResponse('/movies',status_code=303)
 
 @app.put('/movies/{id}',tags=['Movies'])
 def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
@@ -174,6 +174,10 @@ def delete_movie(id:int)->List[Movie]:
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
     return JSONResponse(content=content)
+
+@app.get('/get_file')
+def get_file():
+    return FileResponse('file.pdf')
 
 
 
