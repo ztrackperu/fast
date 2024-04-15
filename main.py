@@ -116,10 +116,10 @@ def update_movie(
 ):
     for movie in movies :
         if movie['id']==id:
-            movie['title']=title,
-            movie['overview']=overview,
-            movie['year']=year,
-            movie['rating']=rating,
+            movie['title']=title
+            movie['overview']=overview
+            movie['year']=year
+            movie['rating']=rating
             movie['category']=category
     return movies
 
