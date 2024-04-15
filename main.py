@@ -35,7 +35,7 @@ movies =[
 from typing import Union
 
 from fastapi import FastAPI ,Body
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse
 # para realizar esquemas importamos pydantic
@@ -53,6 +53,14 @@ class Movie(BaseModel):
     #modelo usado solo pa registar y listar
     id:int
     title:str
+    overview:str
+    year:int
+    rating:float 
+    category:str
+
+class MovieCreate(BaseModel):
+    id:int
+    title:str=Field(min_length=5,max_length=15)
     overview:str
     year:int
     rating:float 
@@ -103,7 +111,7 @@ def get_movie_by_category(category:str,year :int)->Movie:
     return []
 
 @app.post('/movies' , tags=['Movies'])
-def create_movie(movie:Movie)->List[Movie]:
+def create_movie(movie:MovieCreate)->List[Movie]:
     movies.append(movie.model_dump())
     return movies 
 
