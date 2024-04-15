@@ -41,7 +41,7 @@ from fastapi.responses import HTMLResponse
 # para realizar esquemas importamos pydantic
 from pydantic import BaseModel
 #para usar opcional 
-from typing import Optional
+from typing import Optional,List
 
 app = FastAPI()
 
@@ -78,12 +78,12 @@ def read_root():
 
 # el parametro tiene que ir en llaves 
 @app.get('/movies',tags=['Movies'])
-def get_movies():
+def get_movies()->List[Movie]:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     return movies 
 
 @app.get('/movies/{id}',tags=['Movies'])
-def get_movie(id:int):
+def get_movie(id:int)->Movie:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return id 
     #recorrer la lista y mostrar la que le id se parece 
@@ -94,7 +94,7 @@ def get_movie(id:int):
 
 
 @app.get('/movies/',tags=['Movies'])
-def get_movie_by_category(category:str,year :int):
+def get_movie_by_category(category:str,year :int)->Movie:
     #return category 
     for movie in movies :
         #comparamos el parametro con la query
@@ -103,12 +103,12 @@ def get_movie_by_category(category:str,year :int):
     return []
 
 @app.post('/movies' , tags=['Movies'])
-def create_movie(movie:Movie):
+def create_movie(movie:Movie)->List[Movie]:
     movies.append(movie.model_dump())
     return movies 
 
 @app.put('/movies/{id}',tags=['Movies'])
-def update_movie(id:int,movie1:MovieUpdate):
+def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
     for movie in movies :
         if movie['id']==id:
             movie['title']=movie1.title
@@ -119,7 +119,7 @@ def update_movie(id:int,movie1:MovieUpdate):
     return movies
 
 @app.delete('/movies/{id}',tags=['Movies'])
-def delete_movie(id:int):
+def delete_movie(id:int)->List[Movie]:
     for movie in movies :
         if movie['id']==id:
             movies.remove(movie)
