@@ -24,9 +24,9 @@ app.mount('/static',StaticFiles(directory=static_path),'static')
 templates =Jinja2Templates(directory=templates_path)
 
 @app.get("/",tags=['Home'])
-def home():
+def home(request :Request):
     #return PlainTextResponse(content='Home Luis',status_code=200)
-    return templates.TemplateResponse('index.html',{'message','Welcome'})
+    return templates.TemplateResponse('index.html',{'request':request, 'message':'Welcome'})
 
 
 @app.get('/get_file')
