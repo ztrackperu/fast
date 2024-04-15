@@ -40,11 +40,16 @@ from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 # para realizar esquemas importamos pydantic
 from pydantic import BaseModel
+#para usar opcional 
+from typing import Optional
 
 app = FastAPI()
 
 class Movie(BaseModel):
-    id:int
+    #sin Optional
+    #id:int | None =None
+    #con Optional
+    id:Optional[int]=None
     title:str
     overview:str
     year:int
@@ -93,21 +98,14 @@ def create_movie(movie:Movie):
     return movies 
 
 @app.put('/movies/{id}',tags=['Movies'])
-def update_movie(
-                id:int,
-                title:str=Body(),
-                overview:str=Body(),
-                year:int=Body(),
-                rating:float =Body(),
-                category:str=Body()   
-):
+def update_movie(id:int,movie1:Movie):
     for movie in movies :
         if movie['id']==id:
-            movie['title']=title
-            movie['overview']=overview
-            movie['year']=year
-            movie['rating']=rating
-            movie['category']=category
+            movie['title']=movie1.title
+            movie['overview']=movie1.overview
+            movie['year']=movie1.year
+            movie['rating']=movie1.rating
+            movie['category']=movie1.category
     return movies
 
 @app.delete('/movies/{id}',tags=['Movies'])
