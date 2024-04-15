@@ -103,3 +103,4 @@ def create_movie(id:int=Body(),
         'rating':rating,
         'category':category
     })
+    return movies 
