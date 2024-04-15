@@ -34,7 +34,7 @@ movies =[
 
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI ,Body
 from pydantic import BaseModel
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse
@@ -89,7 +89,12 @@ def get_movie_by_category(category:str,year :int):
     return []
 
 @app.post('/movies' , tags=['Movies'])
-def create_movie(id:int,title:str,overview:str,year:int,rating:float,category:str):
+def create_movie(id:int=Body(),
+                 title:str=Body(),
+                 overview:str=Body(),
+                 year:int=Body(),
+                 rating:float =Body(),
+                 category:str=Body()):
     movies.append({
         'id':id,
         'title':title,
