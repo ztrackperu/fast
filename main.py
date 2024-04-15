@@ -62,7 +62,7 @@ class Movie(BaseModel):
 
 class MovieCreate(BaseModel):
     id:int
-    title:str=Field(min_length=5,max_length=15)
+    title:str=Field(min_length=5,max_length=15,default="My Movie")
     overview:str =Field(min_length=15,max_length=58)
     #año menor o igual al año actual y menor igual a 1900
     year:int = Field(le=datetime.date.today().year,ge=1900)
