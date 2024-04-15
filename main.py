@@ -23,7 +23,7 @@ from typing import Union
 from fastapi import FastAPI ,Body,Path,Query
 from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse ,JSONResponse
 # para realizar esquemas importamos pydantic
 from pydantic import BaseModel
 #para usar opcional 
@@ -104,7 +104,9 @@ def read_root():
 def get_movies()->List[Movie]:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return movies 
-    return [movie.model_dump() for movie in movies]
+    #return [movie.model_dump() for movie in movies]
+    content = [movie.model_dump() for movie in movies]
+    return JSONResponse(content=content)
 
 
 @app.get('/movies/{id}',tags=['Movies'])
