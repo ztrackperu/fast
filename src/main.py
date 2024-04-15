@@ -1,20 +1,14 @@
-
-from typing import Union
-#validamos Parametro y queris 
-from fastapi import FastAPI ,Body,Path,Query
-#manejo de errores personalizados 
-from pydantic import BaseModel,Field,validator
-from fastapi.responses import HTMLResponse ,JSONResponse,PlainTextResponse,RedirectResponse,FileResponse
-from typing import Optional,List
+from fastapi import FastAPI 
+from fastapi.responses import PlainTextResponse,FileResponse
 #importamos la ruta de movie
 from src.routers.movie_router import movie_router
-import datetime
-
+from src.utils.http_error_handler import HTTPErrorHandler
 app = FastAPI()
+#AQUI TRAEMOS EL MIDDLEWARE
+app.add_middleware(HTTPErrorHandler)
 
 @app.get("/",tags=['Home'])
 def home():
-    #return {"Hello": "World"}
     return PlainTextResponse(content='Home Luis',status_code=200)
 
 

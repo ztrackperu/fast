@@ -9,7 +9,7 @@ movie_router = APIRouter()
 
 @movie_router.get('/',tags=['Movies'],status_code=200,response_description="Nos debe devolver una respuesta exitosa")
 def get_movies()->List[Movie]:
-    content = [movie.model_dump() for movie in movies]
+    #content = [movie.model_dump() for movie in movies]
     return JSONResponse(content=content,status_code=200)
 
 
