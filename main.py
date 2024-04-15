@@ -110,7 +110,7 @@ def get_movies()->List[Movie]:
 @app.get('/movies/{id}',tags=['Movies'])
 #hago una validacion con el path
 #para validar que el id ingresado sea mayor a 0
-def get_movie(id:int=Path(ge=0))->Movie:
+def get_movie(id:int=Path(gt=0))->Movie | dict:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return id 
     #recorrer la lista y mostrar la que le id se parece 
@@ -122,7 +122,7 @@ def get_movie(id:int=Path(ge=0))->Movie:
 
 
 @app.get('/movies/',tags=['Movies'])
-def get_movie_by_category(category:str,year :int)->Movie | dict:
+def get_movie_by_category(category:str,year :int)->Movie:
     #return category 
     for movie in movies :
         #comparamos el parametro con la query
