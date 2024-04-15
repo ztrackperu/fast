@@ -23,7 +23,7 @@ from typing import Union
 from fastapi import FastAPI ,Body,Path,Query
 from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
-from fastapi.responses import HTMLResponse ,JSONResponse
+from fastapi.responses import HTMLResponse ,JSONResponse,PlainTextResponse
 # para realizar esquemas importamos pydantic
 from pydantic import BaseModel
 #para usar opcional 
@@ -119,8 +119,11 @@ def get_movie(id:int=Path(gt=0))->Movie | dict:
     for movie in movies :
         #if movie['id']==id:
         if movie.id==id:
-            return movie.model_dump()      
-    return {}
+            #return movie.model_dump()
+            return JSONResponse(content=movie.model_dump())      
+    #return {}
+    return JSONResponse(content={})      
+
 
 
 @app.get('/movies/',tags=['Movies'])
@@ -130,36 +133,44 @@ def get_movie_by_category(category:str = Query(min_length=5,max_length=20))->Mov
         #comparamos el parametro con la query
         #if movie['category']==category:
         if movie.category==category:
-            return movie.model_dump()      
-    return {}
+            #return movie.model_dump()      
+    #return {}
+            return JSONResponse(content=movie.model_dump())      
+    return JSONResponse(content={})    
 
 @app.post('/movies' , tags=['Movies'])
 def create_movie(movie:MovieCreate)->List[Movie]:
     #movies.append(movie.model_dump())
     movies.append(movie)
     #return movies 
-    return [movie.model_dump() for movie in movies]
+    #return [movie.model_dump() for movie in movies]
+    content = [movie.model_dump() for movie in movies]
+    return JSONResponse(content=content)
 
 @app.put('/movies/{id}',tags=['Movies'])
 def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
     for movie in movies :
-        if movie['id']==id:
-            movie['title']=movie1.title
-            movie['overview']=movie1.overview
-            movie['year']=movie1.year
-            movie['rating']=movie1.rating
-            movie['category']=movie1.category
+        if movie.id==id:
+            movie.title=movie1.title
+            movie.overview=movie1.overview
+            movie.year=movie1.year
+            movie.rating=movie1.rating
+            movie.category=movie1.category
     #return movies
-    return [movie.model_dump() for movie in movies]
+    #return [movie.model_dump() for movie in movies]
+    content = [movie.model_dump() for movie in movies]
+    return JSONResponse(content=content)
 
 
 @app.delete('/movies/{id}',tags=['Movies'])
 def delete_movie(id:int)->List[Movie]:
     for movie in movies :
-        if movie['id']==id:
+        if movie.id==id:
             movies.remove(movie)
     #return movies
-    return [movie.model_dump() for movie in movies]
+    #return [movie.model_dump() for movie in movies]
+    content = [movie.model_dump() for movie in movies]
+    return JSONResponse(content=content)
 
 
 
