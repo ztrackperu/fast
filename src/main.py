@@ -28,7 +28,6 @@ def home(request :Request):
     #return PlainTextResponse(content='Home Luis',status_code=200)
     return templates.TemplateResponse('index.html',{'request':request, 'message':'Welcome'})
 
-
 @app.get('/get_file')
 def get_file():
     return FileResponse('file.pdf')
