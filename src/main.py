@@ -20,7 +20,7 @@ app.add_middleware(HTTPErrorHandler)
 static_path=os.path.join(os.path.dirname(__file__),'static/')
 templates_path=os.path.join(os.path.dirname(__file__),'templates/')
 
-app.mount('/static',StaticFiles(directory=static_path),'static')
+app.mount('/static',StaticFiles(directory=static_path),'staticPablito')
 templates =Jinja2Templates(directory=templates_path)
 
 @app.get("/",tags=['Home'])
