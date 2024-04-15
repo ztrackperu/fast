@@ -66,7 +66,7 @@ class MovieCreate(BaseModel):
     overview:str =Field(min_length=15,max_length=58)
     #año menor o igual al año actual y menor igual a 1900
     year:int = Field(le=datetime.date.today().year,ge=1900)
-    rating:float =Field(le=0,ge=10)
+    rating:float =Field(ge=0,le=10)
     category:str = Field(min_length=5,max_length=20)
 
 #para validar numeros 
