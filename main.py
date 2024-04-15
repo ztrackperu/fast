@@ -78,7 +78,7 @@ class MovieCreate(BaseModel):
     category:str = Field(min_length=5,max_length=20)
 
     model_config = {
-        'json_schemo_extra':{
+        'json_schema_extra':{
             'example':{
                 'id':1,
                 'title':'My movie',
