@@ -4,17 +4,29 @@ from fastapi.responses import PlainTextResponse,FileResponse,Response,JSONRespon
 #importamos la ruta de movie
 from src.routers.movie_router import movie_router
 from src.utils.http_error_handler import HTTPErrorHandler
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+import os
+
 app = FastAPI()
 #AQUI TRAEMOS EL MIDDLEWARE
-#app.add_middleware(HTTPErrorHandler)
-@app.middleware('http')
-async def http_error_handler(request:Request,call_next)->Response | JSONResponse:
-    print('Middleware is running!')
-    return await call_next(request)
+app.add_middleware(HTTPErrorHandler)
+#@app.middleware('http')
+#async def http_error_handler(request:Request,call_next)->Response | JSONResponse:
+   # print('Middleware is running!')
+    #return await call_next(request)
+
+static_path=os.path.join(os.path.dirname(__file__),'static/')
+templates_path=os.path.join(os.path.dirname(__file__),'templates/')
+
+app.mount('/static',StaticFiles(directory=static_path),'static')
+templates =Jinja2Templates(directory=templates_path)
 
 @app.get("/",tags=['Home'])
 def home():
-    return PlainTextResponse(content='Home Luis',status_code=200)
+    #return PlainTextResponse(content='Home Luis',status_code=200)
+    return templates.TemplateResponse('index.html')
 
 
 @app.get('/get_file')
