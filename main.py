@@ -12,24 +12,10 @@
 
 #def home():
     #return "Hola mundo luis!"
-movies =[
-    {
-        "id":1,
-        "title": "Avatar",
-        "overview" : "En el exuberante planeta llamado Pandora ...",
-        "year":"2009",
-        "rating":7.8,
-        "category":"Aventura"
-    },
-    {
-        "id":2,
-        "title": "Avatar 2",
-        "overview" : "En el exuberante planeta llamado Pandora ...",
-        "year":"2009",
-        "rating":7.8,
-        "category":"Acción"
-    }
-]
+
+#no debmso enviar directamente un diccionario como respuesta 
+#debe ser una lista de objetos
+#movies:List[Movie] =[]
 #los parametros ruta son valores que podemos pasar por la url
 
 from typing import Union
@@ -105,6 +91,7 @@ class Item(BaseModel):
     price: float
     is_offer: Union[bool, None] = None
 
+movies:List[Movie] =[]
 
 @app.get("/",tags=['Home'])
 def read_root():
@@ -114,7 +101,9 @@ def read_root():
 @app.get('/movies',tags=['Movies'])
 def get_movies()->List[Movie]:
     #return HTMLResponse('<h1>Hola Luis</h1>')
-    return movies 
+    #return movies 
+    return [movie.model_dump() for movie in movies]
+
 
 @app.get('/movies/{id}',tags=['Movies'])
 def get_movie(id:int)->Movie:
@@ -123,7 +112,7 @@ def get_movie(id:int)->Movie:
     #recorrer la lista y mostrar la que le id se parece 
     for movie in movies :
         if movie['id']==id:
-            return movie      
+            return movie.model_dump()      
     return []
 
 
@@ -133,13 +122,15 @@ def get_movie_by_category(category:str,year :int)->Movie:
     for movie in movies :
         #comparamos el parametro con la query
         if movie['category']==category:
-            return movie      
+            return movie.model_dump()      
     return []
 
 @app.post('/movies' , tags=['Movies'])
 def create_movie(movie:MovieCreate)->List[Movie]:
-    movies.append(movie.model_dump())
-    return movies 
+    #movies.append(movie.model_dump())
+    movies.append(movie)
+    #return movies 
+    return [movie.model_dump() for movie in movies]
 
 @app.put('/movies/{id}',tags=['Movies'])
 def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
@@ -150,14 +141,18 @@ def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
             movie['year']=movie1.year
             movie['rating']=movie1.rating
             movie['category']=movie1.category
-    return movies
+    #return movies
+    return [movie.model_dump() for movie in movies]
+
 
 @app.delete('/movies/{id}',tags=['Movies'])
 def delete_movie(id:int)->List[Movie]:
     for movie in movies :
         if movie['id']==id:
             movies.remove(movie)
-    return movies
+    #return movies
+    return [movie.model_dump() for movie in movies]
+
 
 
     
