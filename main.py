@@ -98,16 +98,16 @@ movies:List[Movie] =[]
 @app.get("/",tags=['Home'])
 def home():
     #return {"Hello": "World"}
-    return PlainTextResponse(content='Home Luis')
+    return PlainTextResponse(content='Home Luis',status_code=200)
 
 # el parametro tiene que ir en llaves 
-@app.get('/movies',tags=['Movies'])
+@app.get('/movies',tags=['Movies'],status_code=500,response_description="Esto debe devolver un error")
 def get_movies()->List[Movie]:
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return movies 
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
-    return JSONResponse(content=content)
+    return JSONResponse(content=content,status_code=200)
 
 
 @app.get('/movies/{id}',tags=['Movies'])
@@ -121,9 +121,9 @@ def get_movie(id:int=Path(gt=0))->Movie | dict:
         #if movie['id']==id:
         if movie.id==id:
             #return movie.model_dump()
-            return JSONResponse(content=movie.model_dump())      
+            return JSONResponse(content=movie.model_dump(),status_code=200)      
     #return {}
-    return JSONResponse(content={})      
+    return JSONResponse(content={},status_code=404)      
 
 
 
@@ -136,8 +136,8 @@ def get_movie_by_category(category:str = Query(min_length=5,max_length=20))->Mov
         if movie.category==category:
             #return movie.model_dump()      
     #return {}
-            return JSONResponse(content=movie.model_dump())      
-    return JSONResponse(content={})    
+            return JSONResponse(content=movie.model_dump(),status_code=200)      
+    return JSONResponse(content={},status_code=404)    
 
 @app.post('/movies' , tags=['Movies'])
 def create_movie(movie:MovieCreate)->List[Movie]:
@@ -146,7 +146,7 @@ def create_movie(movie:MovieCreate)->List[Movie]:
     #return movies 
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
-    return JSONResponse(content=content)
+    return JSONResponse(content=content,status_code=201)
     #303 es un aredireccion a nuestra propia aplicacion
     #return RedirectResponse('/movies',status_code=303)
 
@@ -162,7 +162,7 @@ def update_movie(id:int,movie1:MovieUpdate)->List[Movie]:
     #return movies
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
-    return JSONResponse(content=content)
+    return JSONResponse(content=content,status_code=200)
 
 
 @app.delete('/movies/{id}',tags=['Movies'])
@@ -173,7 +173,7 @@ def delete_movie(id:int)->List[Movie]:
     #return movies
     #return [movie.model_dump() for movie in movies]
     content = [movie.model_dump() for movie in movies]
-    return JSONResponse(content=content)
+    return JSONResponse(content=content,status_code=200)
 
 @app.get('/get_file')
 def get_file():
