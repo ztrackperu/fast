@@ -38,9 +38,18 @@ from fastapi import FastAPI ,Body
 from pydantic import BaseModel
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse
+# para realizar esquemas importamos pydantic
+from pydantic import BaseModel
 
 app = FastAPI()
 
+class Movie(BaseModel):
+    id:int
+    title:str
+    overview:str
+    year:int
+    rating:float 
+    category:str
 
 class Item(BaseModel):
     name: str
@@ -68,17 +77,7 @@ def get_movie(id:int):
             return movie      
     return []
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
 
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
-
-#logica
-#localhost:5000/movies/?id=123
 @app.get('/movies/',tags=['Movies'])
 def get_movie_by_category(category:str,year :int):
     #return category 
@@ -89,20 +88,8 @@ def get_movie_by_category(category:str,year :int):
     return []
 
 @app.post('/movies' , tags=['Movies'])
-def create_movie(id:int=Body(),
-                 title:str=Body(),
-                 overview:str=Body(),
-                 year:int=Body(),
-                 rating:float =Body(),
-                 category:str=Body()):
-    movies.append({
-        'id':id,
-        'title':title,
-        'overview':overview,
-        'year':year,
-        'rating':rating,
-        'category':category
-    })
+def create_movie(movie:Movie):
+    movies.append(movie.model_dump())
     return movies 
 
 @app.put('/movies/{id}',tags=['Movies'])
