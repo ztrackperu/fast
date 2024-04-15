@@ -48,17 +48,17 @@ class Item(BaseModel):
     is_offer: Union[bool, None] = None
 
 
-@app.get("/")
+@app.get("/",tags=['Home'])
 def read_root():
     return {"Hello": "World"}
 
 # el parametro tiene que ir en llaves 
-@app.get('/movies',tags=['Home'])
+@app.get('/movies',tags=['Movies'])
 def get_movies():
     #return HTMLResponse('<h1>Hola Luis</h1>')
     return movies 
 
-@app.get('/movies/{id}',tags=['Home'])
+@app.get('/movies/{id}',tags=['Movies'])
 def get_movie(id:int):
     #return HTMLResponse('<h1>Hola Luis</h1>')
     #return id 
@@ -79,7 +79,7 @@ def update_item(item_id: int, item: Item):
 
 #logica
 #localhost:5000/movies/?id=123
-@app.get('/movies/',tags=['Home'])
+@app.get('/movies/',tags=['Movies'])
 def get_movie_by_category(category:str,year :int):
     #return category 
     for movie in movies :
@@ -87,3 +87,14 @@ def get_movie_by_category(category:str,year :int):
         if movie['category']==category:
             return movie      
     return []
+
+@app.post('/movies' , tags=['Movies'])
+def create_movie(id:int,title:str,overview:str,year:int,rating:float,category:str):
+    movies.append({
+        'id':id,
+        'title':title,
+        'overview':overview,
+        'year':year,
+        'rating':rating,
+        'category':category
+    })
