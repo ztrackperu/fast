@@ -19,7 +19,7 @@ movies =[
         "overview" : "En el exuberante planeta llamado Pandora ...",
         "year":"2009",
         "rating":7.8,
-        "category":"Acción"
+        "category":"Aventura"
     },
     {
         "id":2,
@@ -76,3 +76,14 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: Item):
     return {"item_name": item.name, "item_id": item_id}
+
+#logica
+#localhost:5000/movies/?id=123
+@app.get('/movies/',tags=['Home'])
+def get_movie_by_category(category:str,year :int):
+    #return category 
+    for movie in movies :
+        #comparamos el parametro con la query
+        if movie['category']==category:
+            return movie      
+    return []
