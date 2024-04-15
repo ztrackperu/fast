@@ -28,6 +28,14 @@ def home(request :Request):
     #return PlainTextResponse(content='Home Luis',status_code=200)
     return templates.TemplateResponse('index.html',{'request':request, 'message':'Welcome'})
 
+@app.get('/users')
+def get_users(start_date:str,end_date:str):
+    return f"Users Created between {start_date} and {end_date}"
+
+@app.get('/customers')
+def get_customer(start_date:str,end_date:str):
+    return f"Customers Created between {start_date} and {end_date}"
+
 @app.get('/get_file')
 def get_file():
     return FileResponse('file.pdf')
