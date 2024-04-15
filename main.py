@@ -20,6 +20,14 @@ movies =[
         "year":"2009",
         "rating":7.8,
         "category":"Acción"
+    },
+    {
+        "id":2,
+        "title": "Avatar 2",
+        "overview" : "En el exuberante planeta llamado Pandora ...",
+        "year":"2009",
+        "rating":7.8,
+        "category":"Acción"
     }
 ]
 #los parametros ruta son valores que podemos pasar por la url
@@ -53,7 +61,12 @@ def get_movies():
 @app.get('/movies/{id}',tags=['Home'])
 def get_movie(id:int):
     #return HTMLResponse('<h1>Hola Luis</h1>')
-    return id 
+    #return id 
+    #recorrer la lista y mostrar la que le id se parece 
+    for movie in movies :
+        if movie['id']==id:
+            return movie      
+    return []
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
