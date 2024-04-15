@@ -26,7 +26,7 @@ templates =Jinja2Templates(directory=templates_path)
 @app.get("/",tags=['Home'])
 def home():
     #return PlainTextResponse(content='Home Luis',status_code=200)
-    return templates.TemplateResponse('index.html')
+    return templates.TemplateResponse('index.html',{'message','Welcome'})
 
 
 @app.get('/get_file')
