@@ -51,7 +51,7 @@ def get_movies():
     return movies 
 
 @app.get('/movies/{id}',tags=['Home'])
-def get_movie():
+def get_movie(id:int):
     #return HTMLResponse('<h1>Hola Luis</h1>')
     return id 
 
