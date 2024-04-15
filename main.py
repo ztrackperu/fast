@@ -107,6 +107,7 @@ def create_movie(id:int=Body(),
 
 @app.put('/movies/{id}',tags=['Movies'])
 def update_movie(
+                id:int,
                 title:str=Body(),
                 overview:str=Body(),
                 year:int=Body(),
@@ -123,7 +124,7 @@ def update_movie(
     return movies
 
 @app.delete('/movies/{id}',tags=['Movies'])
-def delete_movie():
+def delete_movie(id:int):
     for movie in movies :
         if movie['id']==id:
             movies.remove(movie)
