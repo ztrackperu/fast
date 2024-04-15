@@ -49,7 +49,17 @@ class Movie(BaseModel):
     #sin Optional
     #id:int | None =None
     #con Optional
-    id:Optional[int]=None
+    #id:Optional[int]=None
+    #modelo usado solo pa registar y listar
+    id:int
+    title:str
+    overview:str
+    year:int
+    rating:float 
+    category:str
+
+class MovieUpdate(BaseModel):
+    #modelo pa actualizar
     title:str
     overview:str
     year:int
@@ -98,7 +108,7 @@ def create_movie(movie:Movie):
     return movies 
 
 @app.put('/movies/{id}',tags=['Movies'])
-def update_movie(id:int,movie1:Movie):
+def update_movie(id:int,movie1:MovieUpdate):
     for movie in movies :
         if movie['id']==id:
             movie['title']=movie1.title
