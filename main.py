@@ -3,11 +3,10 @@
 from typing import Union
 #validamos Parametro y queris 
 from fastapi import FastAPI ,Body,Path,Query
-from pydantic import BaseModel,Field
+#manejo de errores personalizados 
+from pydantic import BaseModel,Field,validator
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse ,JSONResponse,PlainTextResponse,RedirectResponse,FileResponse
-# para realizar esquemas importamos pydantic
-from pydantic import BaseModel
 #para usar opcional 
 from typing import Optional,List
 #importar manejador de fechas 
@@ -26,7 +25,7 @@ class Movie(BaseModel):
 class MovieCreate(BaseModel):
 
     id:int
-    title:str=Field(min_length=5,max_length=15)
+    title:str
     overview:str =Field(min_length=15,max_length=58)
     #año menor o igual al año actual y menor igual a 1900
     year:int = Field(le=datetime.date.today().year,ge=1900 )
@@ -45,6 +44,13 @@ class MovieCreate(BaseModel):
             }
         }
     }
+    @validator('title')
+    def validate_title(cls,value):
+        if len(value)<5:
+            raise ValueError('Title field must have a minium length of 5 charecters Luis')
+        if len(value)>15:
+            raise ValueError('Title field must have a maximun length of 15 charecters Luis')
+        return value
 
 class MovieUpdate(BaseModel):
     title:str
