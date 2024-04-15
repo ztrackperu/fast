@@ -19,8 +19,8 @@
 #los parametros ruta son valores que podemos pasar por la url
 
 from typing import Union
-
-from fastapi import FastAPI ,Body,Path
+#validamos Parametro y queris 
+from fastapi import FastAPI ,Body,Path,Query
 from pydantic import BaseModel,Field
 #esto nos permite enviar una respuesta html al servidor 
 from fastapi.responses import HTMLResponse
@@ -122,13 +122,14 @@ def get_movie(id:int=Path(gt=0))->Movie | dict:
 
 
 @app.get('/movies/',tags=['Movies'])
-def get_movie_by_category(category:str,year :int)->Movie:
+def get_movie_by_category(category:str = Query(min_length=5,max_length=20))->Movie | dict:
     #return category 
     for movie in movies :
         #comparamos el parametro con la query
-        if movie['category']==category:
+        #if movie['category']==category:
+        if movie.category==category:
             return movie.model_dump()      
-    return []
+    return {}
 
 @app.post('/movies' , tags=['Movies'])
 def create_movie(movie:MovieCreate)->List[Movie]:
