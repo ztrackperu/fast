@@ -96,8 +96,9 @@ class Item(BaseModel):
 movies:List[Movie] =[]
 
 @app.get("/",tags=['Home'])
-def read_root():
-    return {"Hello": "World"}
+def home():
+    #return {"Hello": "World"}
+    return PlainTextResponse(content='Home Luis')
 
 # el parametro tiene que ir en llaves 
 @app.get('/movies',tags=['Movies'])
