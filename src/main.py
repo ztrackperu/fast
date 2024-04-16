@@ -5,6 +5,7 @@ from fastapi.responses import PlainTextResponse,FileResponse,Response,JSONRespon
 from src.routers.movie_router import movie_router
 from src.utils.http_error_handler import HTTPErrorHandler
 from typing import Annotated
+from src.routers.user_db import router_user
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -71,6 +72,8 @@ def get_file():
     return FileResponse('file.pdf')
 
 app.include_router(prefix='/movies',router=movie_router)
+
+app.include_router(prefix='/users',router=router_user)
 
 
 
