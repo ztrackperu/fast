@@ -73,7 +73,7 @@ def get_file():
 
 app.include_router(prefix='/movies',router=movie_router)
 
-app.include_router(prefix='/users',router=router_user)
+app.include_router(prefix='/usersDb',router=router_user)
 
 
 
