@@ -39,7 +39,7 @@ async def user(user: User):
     #elimino el campo id 
     del user_dict["id"]
     #insersion en base de datos y captura del id insertardo
-    id = db_client.users.insert_one(user_dict).inserted_id
+    id = db_client.intranet.users.insert_one(user_dict).inserted_id
     #buscar el id e insertar dat
     # user_schema es la estructura del json que esta en carpeta schema
     new_user = user_schema(db_client.users.find_one({"_id": id}))
