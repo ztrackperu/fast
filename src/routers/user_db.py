@@ -29,7 +29,7 @@ async def user(id: str):
     return search_user("_id", ObjectId(id))
 
 
-@router_user.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
+@router_user.post("/", tags=['usersDB'] ,response_model=User, status_code=status.HTTP_201_CREATED)
 async def user(user: User):
     if type(search_user("email", user.email)) == User:
         raise HTTPException(
