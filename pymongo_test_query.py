@@ -56,8 +56,6 @@ pipeline = [
 ]
 
 item_details = cabeot.aggregate(pipeline)
-
-
 #item_details = cabeot.find().limit(1)
 print("olitas")
 #print(item_details[0]->c_desequipo)

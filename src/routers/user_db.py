@@ -80,3 +80,14 @@ def search_user(field: str, key):
         return User(**user_schema(user))
     except:
         return {"error": "No se ha encontrado el usuario"}
+    
+def search_ot(field: str, key):
+
+    try:
+        user = db_client.users.find_one({field: key})
+        return User(**user_schema(user))
+    except:
+        return {"error": "No se ha encontrado el usuario"}
+
+
+    
