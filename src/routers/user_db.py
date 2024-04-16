@@ -39,10 +39,10 @@ async def user(user: User):
     #elimino el campo id 
     del user_dict["id"]
     #insersion en base de datos y captura del id insertardo
-    id = db_client.local.users.insert_one(user_dict).inserted_id
+    id = db_client.monTest.users.insert_one(user_dict).inserted_id
     #buscar el id e insertar dat
     # user_schema es la estructura del json que esta en carpeta schema
-    new_user = user_schema(db_client.local.users.find_one({"_id": id}))
+    new_user = user_schema(db_client.monTest.users.find_one({"_id": id}))
     #realizamos la trasformacion de la base de datos al modelo User
     return User(**new_user)
 
