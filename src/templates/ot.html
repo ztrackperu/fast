@@ -201,7 +201,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td colspan="3"><?php echo $obs; ?>&nbsp;</td>
+    <td colspan="3">{{ message.montop }}  <?php echo $obs; ?>&nbsp;</td>
   </tr>
   <tr>
     <td><strong>IMPORTANTE</strong></td>
@@ -300,6 +300,8 @@
         <td width="200" align="center" bgcolor="#CCCCCC"><strong>Fecha de NS</strong></td>
         <td width="200" align="center" bgcolor="#CCCCCC"><strong>Motivo</strong></td>
         </tr>
+
+        {% for item in message.DetalleOt.NotaSalida.NotaSalidaDetalle %}
            <?php $i=0;
                 if($reportens != NULL)
                 {
@@ -311,7 +313,7 @@
 						<tr>
 							<td align="center"><?php   echo $i; ?></td>       
 							<td align="center"><?php   echo $item['NT_NDOC']; ?></td>
-							<td align="center"><?php   echo $item['NT_CART']; ?></td>
+							<td align="center">{{ message.NT_CART }}    <?php   echo $item['NT_CART']; ?></td>
 							<td align="left"  ><?php   echo $item['IN_ARTI']; ?></td>
 
 						<?php		
@@ -349,6 +351,8 @@
         <td><?php echo !empty($item['NT_RESPO'])?$item['NT_RESPO']:"<B>EQUIPOS ZGROUP</B>"; ?></td>
 		<td align="center"><?php   echo $item['NT_FDOC']; ?></td> 
 		<td align="center"><?php   echo $item['c_motivo']; ?></td> 
+
+
     </tr>	
 
 		<?php
