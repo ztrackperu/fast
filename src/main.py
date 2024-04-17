@@ -195,7 +195,7 @@ def get_ot2(id:int):
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
         #return JSONResponse(content=dict(item),status_code=200)  
-        return templates.TemplateResponse('ot1.html',{'request':id, 'message':'item'})
+        return templates.TemplateResponse('ot1.html',{'request':'oli', 'message':item})
 
 
          
