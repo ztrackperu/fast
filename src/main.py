@@ -31,13 +31,13 @@ def dependency2():
 
 app = FastAPI(dependencies=[Depends(dependency1),Depends(dependency2)])
 
-#app.add_middleware(
- #   CORSMiddleware,
-  #  allow_origins=["*"],
-   # allow_credentials=True,
-    #allow_methods=["*"],
-    #allow_headers=["*"],
-#)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 #AQUI TRAEMOS EL MIDDLEWARE
 app.add_middleware(HTTPErrorHandler)
 #@app.middleware('http')
