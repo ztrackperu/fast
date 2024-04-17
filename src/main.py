@@ -10,6 +10,8 @@ from src.routers.user_db import router_user
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
+from pymongo_get_database import get_database
+
 #crear dependencias globales 
 def dependency1():
     print("Global Dependeny1")
@@ -67,6 +69,7 @@ def get_customer(commons :CommonDep1= Depends(CommonDep1)):
 #def get_customer(start_date:str,end_date:str):
     #return f"Customers Created between {start_date} and {end_date}"
 
+# responder un archivo den el directorio
 @app.get('/get_file')
 def get_file():
     return FileResponse('file.pdf')
@@ -76,6 +79,76 @@ app.include_router(prefix='/movies',router=movie_router)
 app.include_router(prefix='/usersDb',router=router_user)
 
 
+from pymongo_get_database import get_database
+dbname = get_database()
+ 
+# Recuperar una colección llamada "user_1_items" de la base de datos
+cabeot = dbname["cabeot"]
+ 
+def consulta(data:str):
+    pipeline = [
+        {"$project":{"_id":0,}},
+        #{"$match": {"c_numot": 1000028211}},  
+        {"$match": {"c_numot": data}}, 
+        {
+            "$lookup": {
+                "from": 'detaot',
+                "localField": 'c_numot',
+                "foreignField": 'c_numot',
+                "as": 'DetalleOt',
+                "pipeline": [
+                    {"$project":{"_id":0}} ,
+                    {
+                        "$lookup": {
+                            "from": 'notmae',
+                            "localField": 'c_numot',
+                            "foreignField": 'c_NumOT',
+                            "as": 'NotaSalida',
+                            "pipeline": [
+                                {"$project":{"_id":0}} ,
+                                {
+                                    "$lookup": {
+                                        "from": 'notmov',
+                                        "localField": 'NT_NDOC',
+                                        "foreignField": 'NT_NDOC',
+                                        "as": 'NotaSalidaDetalle',
+                                        "pipeline": [
+                                            {"$project":{"_id":0}},
+                                            {
+                                                "$lookup": {
+                                                    "from": 'invmae',
+                                                    "localField": 'NT_CART',
+                                                    "foreignField": 'IN_CODI',
+                                                    "as": 'DetalleInsumo',
+                                                    "pipeline": [
+                                                        {"$project":{"_id":0,"IN_ARTI":1,"IN_UVTA":1,"IN_COST":1}},                       
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],    
+                        },
+                    }
+                ]
+            }
+        },   
+    ]
+    return pipeline
 
+#item_details = cabeot.aggregate(pipeline)
+#item_details = cabeot.find().limit(1)
+#print("olitas")
+#print(item_details[0]->c_desequipo)
+#for item in  item_details:
+ # Esto no proporciona una salida muy legible
+  #print("dentro")
+  #print(item)
 
     
+@app.get('/testOT/{id}')
+def get_ot(id:str):
+    item_details = cabeot.aggregate(consulta(id))
+    for item in item_details :
+        return JSONResponse(content=item.model_dump(),status_code=200)      
