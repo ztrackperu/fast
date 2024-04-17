@@ -52,13 +52,13 @@
       <tr>
         <td align="right"><strong>Generado Por</strong></td>
         <td><strong>:</strong></td>
-        <td align="right"><?php echo $c_usrcrea ?>&nbsp;</td>
+        <td align="right"> {{ message.c_usrcrea }}&nbsp;</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
         <td align="right"><strong>Aprobado/Cerrado Por</strong></td>
         <td>:</td>
-        <td align="right"><?php echo strtoupper($c_uaprobx); ?>&nbsp;</td>
+        <td align="right"> {{ message.c_uaprobx }} &nbsp;</td>
       </tr>
       </table></td>
     </tr>
@@ -76,50 +76,50 @@
       <tr>
         <td width="131"><strong>Trabajo A Realizar</strong></td>
         <td><strong>:</strong></td>
-        <td colspan="7"><?php echo $c_treal ?>&nbsp;</td>
+        <td colspan="7"> <?php echo $c_treal ?>&nbsp;</td>
         </tr>
       <tr>
         <td><strong>Fecha Orden</strong></td>
         <td width="3"><strong>:</strong></td>
-        <td width="187"><?php echo vfecha(substr($d_fecdcto,0,10)) ?>&nbsp;</td>
+        <td width="187">{{ message.d_fecdcto }}  <?php echo vfecha(substr($d_fecdcto,0,10)) ?>&nbsp;</td>
         <td width="105"><strong>Moneda </strong></td>
         <td width="7"><strong>:</strong></td>
-        <td width="141"><?php echo $moneda ?>&nbsp;</td>
+        <td width="141">{{ message.moneda }}  <?php echo $moneda ?>&nbsp;</td>
         <td width="97"><strong>Ref Documento</strong></td>
         <td width="5"><strong>:</strong></td>
-        <td width="131"><?php echo  $factura?></td>
+        <td width="131">{{ message.factura }}  <?php echo  $factura?></td>
       </tr>
       <tr>
         <td><strong>Solicitado Por</strong></td>
         <td><strong>:</strong></td>
-        <td><?php echo $c_solicita ?>&nbsp;</td>
+        <td>{{ message.c_solicita }}  <?php echo $c_solicita ?>&nbsp;</td>
         <td><strong>Supervisado por</strong></td>
         <td><strong>:</strong></td>
-        <td><?php echo $c_supervisa ?>&nbsp;</td>
+        <td>{{ message.c_supervisa }}  <?php echo $c_supervisa ?>&nbsp;</td>
         <td><strong>Lugar Trabajo</strong></td>
         <td><strong>:</strong></td>
-        <td><?php echo $c_lugartab ?>&nbsp;</td>
+        <td>{{ message.c_lugartab }}  <?php echo $c_lugartab ?>&nbsp;</td>
       </tr>
       <tr>
         <td><strong>Equipo</strong></td>
         <td><strong>:</strong></td>
-        <td colspan="4"><?php echo $c_desequipo. ' Cliente: '.$cliente.'-'.$coti ?>&nbsp;</td>
+        <td colspan="4"> {{ message.c_desequipo }} Cliente :  {{ message.cliente }} - {{ message.coti }}  <?php echo $c_desequipo. ' Cliente: '.$cliente.'-'.$coti ?>&nbsp;</td>
         <td><strong>Codigo Equipo</strong></td>
         <td><strong>:</strong></td>
-        <td><?php echo $unidad ?>&nbsp;</td>
+        <td>{{ message.unidad }}  <?php echo $unidad ?>&nbsp;</td>
       </tr>
 	  <tr>
         <td><strong>Serie Equipo</strong></td>
         <td><strong>:</strong></td>
-        <td colspan="4"><?php echo $c_serie ?>&nbsp;</td>
+        <td colspan="4">{{ message.c_serie }}  <?php echo $c_serie ?>&nbsp;</td>
       </tr>
 	  <tr>
         <td><strong>Hora Inicio</strong></td>
         <td><strong>:</strong></td>
-        <td colspan="4"><?php echo $horI ?>&nbsp;</td>
+        <td colspan="4">{{ message.horI }}  <?php echo $horI ?>&nbsp;</td>
         <td><strong>Hora Fin</strong></td>
         <td><strong>:</strong></td>
-        <td><?php echo $$horF ?>&nbsp;</td>
+        <td>{{ message.horF }}  <?php echo $$horF ?>&nbsp;</td>
       </tr>
       </table></td>
     </tr>
