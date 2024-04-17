@@ -1,0 +1,26 @@
+
+/*Credits: CSSpplay */
+/*URL: http://www.cssplay.co.uk/menus/pro_15 */
+.pro15 {padding:0 0 0 20px; margin:0; list-style:none; height:30px; background:#1841c8 url(../images/pro_15_0.gif);}
+.pro15 li {float:left;}
+.pro15 li a {display:block; float:left; height:30px; line-height:30px; background:url(../images/pro_15_0.gif); color:#ddd; text-decoration:none; font-family:arial, verdana, sans-serif; text-align:center; padding:0 0 0 10px; cursor:pointer; font-size:11px;}
+.pro15 li a b {float:left; display:block; background:url(../images/pro_15_0.gif) right top; padding:0 16px 0 8px;}
+.pro15 li.current a {color:#fff; background:url(../images/pro_15_2.gif);}
+.pro15 li.current a b {background:url(../images/pro_15_2.gif) no-repeat right top;}
+.pro15 li a:hover {color:#fff; background: url(../images/pro_15_1.gif);}
+.pro15 li a:hover b {background:url(../images/pro_15_1.gif) no-repeat right top;}
+.pro15 li.current a:hover {color:#fff; background: url(../images/pro_15_2.gif); cursor:default;}
+.pro15 li.current a:hover b {background:url(../images/pro_15_2.gif) no-repeat right top;}
+.pro15 li a em {display:block; float:left; width:16px; height:30px;}
+
+.pro15 li a em.home {background:url(../images/home.gif) no-repeat center center;}
+/*.pro15 li a em.calendar {background:url(../images/events.gif) no-repeat center center;}
+.pro15 li a em.camera {background:url(../images/camera.gif) no-repeat center center;}
+.pro15 li a em.find {background:url(../images/find.gif) no-repeat center center;}
+.pro15 li a em.contact {background:url(../images/contact.gif) no-repeat center center;}
+.pro15 li a em.search {background:url(../images/search.gif) no-repeat center center;}
+*/
+ .print_txt {
+	font-family:sans-serif
+	font-size:14px;
+}
