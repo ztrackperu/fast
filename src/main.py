@@ -198,4 +198,12 @@ def get_ot2(id:int,request :Request):
         return templates.TemplateResponse('ot1.html',{ 'request':request,'message':item})
         #return datosOT(item)
 
+@app.get('/testOT4/{id}')
+def get_ot3(id:int,request :Request):
+    item_details = cabeot.aggregate(consulta(id))
+    for item in item_details :
+        #return JSONResponse(content=item.model_dump(),status_code=200)
+        #return JSONResponse(content=dict(item),status_code=200)  
+        return templates.TemplateResponse('ot.html',{ 'request':request,'message':item})
+        #return datosOT(item)
 
