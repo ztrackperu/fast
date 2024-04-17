@@ -156,11 +156,19 @@ def consulta1(data:int):
   #print(item)
 
     
-@app.get('/testOT/{id}')
+@app.get('/testOT2/{id}')
 def get_ot(id:int):
     #item_details = cabeot.aggregate(consulta(id))
     item_details = dataot.aggregate(consulta1(id))
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
+        return JSONResponse(content=dict(item),status_code=200)    
+
+@app.get('/testOT/{id}')
+def get_ot(id:int):
+    item_details = cabeot.aggregate(consulta(id))
+    for item in item_details :
+        #return JSONResponse(content=item.model_dump(),status_code=200)
         return JSONResponse(content=dict(item),status_code=200)     
+     
          
