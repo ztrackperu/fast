@@ -14,7 +14,10 @@
         <h1>{{ item.concepto }}</h1>
         {% for item in item.NotaSalida %} 
             <h2>{{ item.NT_NDOC }}</h2>
-            <li>{{ item }}</li>
+            {% for item in item.NotaSalidaDetalle %} 
+                <h2>{{ item.NT_CART }}</h2>
+                <li>{{ item }}</li>
+            {% endfor %}
         {% endfor %}
     {% endfor %}
 
