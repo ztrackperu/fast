@@ -151,4 +151,6 @@ def consulta(data:str):
 def get_ot(id:str):
     item_details = cabeot.aggregate(consulta(id))
     for item in item_details :
-        return JSONResponse(content=item.model_dump(),status_code=200)      
+        #return JSONResponse(content=item.model_dump(),status_code=200)
+        return JSONResponse(content=item,status_code=200)     
+         
