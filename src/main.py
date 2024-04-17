@@ -164,6 +164,72 @@ def consulta1(data:int):
     ]
     return pipeline
 
+def consulta2(data:int):
+    pipeline = [
+        {"$project":{"_id":0,}},
+        {"$match": {"c_numot": data}},  
+        {
+            "$lookup": {
+                "from": "detaot",
+                "localField": "c_numot",
+                "foreignField": "c_numot",
+                "as": "DetalleOt",
+                "pipeline": [
+                    {"$project":{"_id":0}} ,
+                ]
+            },
+        }, 
+        {
+            "$lookup": {
+                "from": "notmae",
+                "localField": "c_numot",
+                "foreignField": "c_NumOT",
+                "as":"NotaSalida",
+                "pipeline": [
+                    {"$project":{"_id":0}} ,
+                    {
+                        "$lookup": {
+                            "from": 'notmov',
+                            "localField": 'NT_NDOC',
+                            "foreignField": 'NT_NDOC',
+                            "as": 'NotaSalidaDetalle',
+                            "pipeline": [
+                                {"$project":{"_id":0}},
+                                {
+                                    "$lookup": {
+                                        "from": 'detaoc',
+                                        "localField": 'NT_CART',
+                                        "foreignField": 'c_codprd',
+                                        "as": 'detaoc',
+                                        "pipeline": [
+                                            {"$project":{"_id":0}},
+                                            {"$sort" :{"c_numeoc":-1}} ,
+                                            {"$limit" :1},
+                                            {
+                                                "$lookup": {
+                                                    "from": 'invmae',
+                                                    "localField": 'c_codprd',
+                                                    "foreignField": 'IN_CODI',
+                                                    "as": 'DetalleInsumo',
+                                                    "pipeline": [
+                                                        {"$project":{"_id":0,"IN_ARTI":1}},                                                                            
+                                                    ]
+                                                }
+                                            },
+                                        ]
+                                    }
+            
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }, 
+        }
+    ]
+    return pipeline
+
+
 #item_details = cabeot.aggregate(pipeline)
 #item_details = cabeot.find().limit(1)
 #print("olitas")
@@ -206,4 +272,11 @@ def get_ot3(id:int,request :Request):
         #return JSONResponse(content=dict(item),status_code=200)  
         return templates.TemplateResponse('ot.html',{ 'request':request,'message':item})
         #return datosOT(item)
+
+@app.get('/ot/{id}')
+def get_ot4(id:int,request :Request):
+    item_details = cabeot.aggregate(consulta2(id))
+    for item in item_details :
+      return JSONResponse(content=dict(item),status_code=200) 
+
 
