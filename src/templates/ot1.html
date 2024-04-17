@@ -8,15 +8,17 @@
 </head>
 <body>
     <h1> Pablito OT</h1>
-    <h1> {{ message.c_numot }}</h1>
+    <h1>OT Consultada :  {{ message.c_numot }}</h1>
 
     {% for item in message.DetalleOt %}
-        <h1>{{ item.concepto }}</h1>
+        <h1>Concepto : {{ item.concepto }}</h1>
         {% for item in item.NotaSalida %} 
-            <h2>{{ item.NT_NDOC }}</h2>
+            <h2>Nota : {{ item.NT_NDOC }}</h2>
             {% for item in item.NotaSalidaDetalle %} 
-                <h2>{{ item.NT_CART }}</h2>
-                <li>{{ item }}</li>
+                <h3>Insumo : {{ item.NT_CART }}</h3>
+                {% for item in item.DetalleInsumo %} 
+                    <h4>Descripcion{{ item.IN_ARTI }}</h4>
+                {% endfor %}
             {% endfor %}
         {% endfor %}
     {% endfor %}
