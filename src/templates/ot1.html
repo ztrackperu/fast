@@ -9,7 +9,8 @@
 <body>
     <h1> Pablito OT</h1>
     <h1> {{ message.c_numot }}</h1>
-    {% for item in message %}
+    {% DetalleOt =message.DetalleOt  %}
+    {% for item in DetalleOt %}
     <li>{{ item }}</li>
     {% endfor %}
 
