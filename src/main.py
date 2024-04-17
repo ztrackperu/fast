@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
 from pymongo_get_database import get_database
-#from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost",
@@ -19,6 +19,7 @@ origins = [
     "http://192.168.1.185",
     "http://localhost:8000",
 ]
+origins1 = ["*"]
 
 
 #crear dependencias globales 
