@@ -199,7 +199,7 @@ def get_ot2(id:int):
         return datosOT(item)
 
 @app.get("/datosOT",tags=['Home'])
-def datosOT(request :Request):
+def datosOT(request :Request,item :object):
     #return PlainTextResponse(content='Home Luis',status_code=200)
-    return templates.TemplateResponse('ot1.html',{'request':request, 'message':'Welcome'})
+    return templates.TemplateResponse('ot1.html',{'request':request, 'message':item})
 
