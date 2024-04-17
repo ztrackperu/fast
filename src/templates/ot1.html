@@ -11,9 +11,9 @@
     <h1> {{ message.c_numot }}</h1>
 
     {% for item in message.DetalleOt %}
-        <li>{{ item.concepto }}</li>
+        <h1>{{ item.concepto }}</h1>
         {% for item in item.NotaSalida %} 
-            <li>{{ item }}</li>
+            <h2>{{ item.NT_NDOC }}</h2>
         {% endfor %}
     {% endfor %}
 
