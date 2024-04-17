@@ -195,6 +195,11 @@ def get_ot2(id:int):
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
         #return JSONResponse(content=dict(item),status_code=200)  
-        return templates.TemplateResponse('ot1.html',{ 'message':item})
+        #return templates.TemplateResponse('ot1.html',{ 'message':item})
+        return datosOT(item)
 
+@app.get("/datosOT",tags=['Home'])
+def datosOT(request :Request):
+    #return PlainTextResponse(content='Home Luis',status_code=200)
+    return templates.TemplateResponse('index.html',{'request':request, 'message':'Welcome'})
 
