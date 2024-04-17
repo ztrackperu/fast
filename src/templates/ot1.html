@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{url_for('staticPablito',path='/styles.css')}}"
 </head>
 <body>
-    <h1>{{message }} Pablito OT</h1>
+    <h1> Pablito OT</h1>
+    {% for item in message %}
+    <li>{{ item }}</li>
+    {% endfor %}
+
 </body>
 </html>
