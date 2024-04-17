@@ -9,14 +9,16 @@
 <meta name="keywords" content="jquery, form, sliding, usability, css3, validation, javascript"/>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" type="text/css" href="../css/imprimir.css">
+
+<link rel="stylesheet" href="{{url_for('staticPablito',path='/imprimir.css')}}"
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-
+                                                                                                                                                                                                              
 </head>
 <style type="text/css" media="print">
 .nover {display:none}
@@ -36,7 +38,8 @@
   <tr>
     <td colspan="4"><table width="816" border="0" cellpadding="0" cellspacing="0" style="font-family: 'Arial Narrow', Arial, sans-serif;font-size:12px">
       <tr>
-        <td width="453" rowspan="3"><img src="../images/logo-z.png" width="145" height="50" /></td>
+        <td width="453" rowspan="3"><img src="{{url_for('staticPablito',path='/logo-z.png')}}" width="145" height="50" /></td>
+        <!--<td width="453" rowspan="3"><img src="../images/logo-z.png" width="145" height="50" /></td>!-->
         <td width="250" align="right"><strong>Fecha de Impresion</strong></td>
         <td width="10"><strong>:</strong></td>
         <td width="108" align="right"><?php echo date("d/m/y")." ".date("H:i:s");?>&nbsp;</td>
