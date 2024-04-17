@@ -160,22 +160,24 @@
 								{
 							
 							?>
+                            {% for item in message.DetalleOt %}
       <tr>
-        <td align="center"><?php echo $item['c_numot']; ?></td>
-        <td align="center"><?php echo $item['c_rucprov']; ?></td>
-        <td align="center"><?php echo strtoupper($item['c_nomprov']); ?></td>
-        <td align="center"><?php echo strtoupper($item['concepto']); ?></td>
-        <td align="center"><?php echo strtoupper($item['c_tecnico']); ?></td>
-        <td align="center"><?php echo strtoupper($item['tdoc']); ?></td>
-        <td align="center"><?php echo $item['ndoc']; ?></td>
-        <td align="center"><?php echo $item['fdoc']; ?></td>
-        <td align="center"><?php echo $item['monto']; ?></td>
-        <td align="center"><?php echo $item['n_cant']; ?>&nbsp;</td>
-        <td align="center"><?php echo $item['n_igvd']; ?>&nbsp;</td>
-        <td align="center"><?php echo $item['n_totd']; ?>&nbsp;</td>
-        <td align="center"><?php echo $item['montop']; ?></td>
+        <td align="center"> {{ message.c_numot }}  <?php echo $item['c_numot']; ?></td>
+        <td align="center"> {{ message.c_rucprov }}  <?php echo $item['c_rucprov']; ?></td>
+        <td align="center"> {{ message.c_nomprov }}  <?php echo strtoupper($item['c_nomprov']); ?></td>
+        <td align="center"> {{ message.concepto }}  <?php echo strtoupper($item['concepto']); ?></td>
+        <td align="center"> {{ message.c_tecnico }}  <?php echo strtoupper($item['c_tecnico']); ?></td>
+        <td align="center"> {{ message.tdoc }}  <?php echo strtoupper($item['tdoc']); ?></td>
+        <td align="center"> {{ message.ndoc }}  <?php echo $item['ndoc']; ?></td>
+        <td align="center"> {{ message.fdoc }}  <?php echo $item['fdoc']; ?></td>
+        <td align="center"> {{ message.monto }}  <?php echo $item['monto']; ?></td>
+        <td align="center"> {{ message.n_cant }}  <?php echo $item['n_cant']; ?>&nbsp;</td>
+        <td align="center"> {{ message.n_igvd }}  <?php echo $item['n_igvd']; ?>&nbsp;</td>
+        <td align="center"> {{ message.n_totd }}  <?php echo $item['n_totd']; ?>&nbsp;</td>
+        <td align="center"> {{ message.montop }}  <?php echo $item['montop']; ?></td>
       </tr>
       <?php }}?>
+      {% endfor %}
     </table></td>
     </tr>
   <tr>
