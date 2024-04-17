@@ -11,6 +11,15 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
 from pymongo_get_database import get_database
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://192.168.1.185",
+    "http://localhost:8000",
+]
+
 
 #crear dependencias globales 
 def dependency1():
@@ -20,6 +29,14 @@ def dependency2():
     print("Global Dependeny2")
 
 app = FastAPI(dependencies=[Depends(dependency1),Depends(dependency2)])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 #AQUI TRAEMOS EL MIDDLEWARE
 app.add_middleware(HTTPErrorHandler)
 #@app.middleware('http')
