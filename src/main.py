@@ -216,6 +216,17 @@ def consulta2(data:int):
                                                     ]
                                                 }
                                             },
+                                            {
+                                                "$lookup": {
+                                                    "from": 'cabeoc',
+                                                    "localField": 'c_numeoc',
+                                                    "foreignField": 'c_numeoc',
+                                                    "as": 'moneda',
+                                                    "pipeline": [
+                                                        {"$project":{"_id":0,"c_codmon":1}},                                                                           
+                                                    ]
+                                                }
+                                        },
                                         ]
                                     }
             
