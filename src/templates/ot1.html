@@ -14,6 +14,7 @@
         <h1>{{ item.concepto }}</h1>
         {% for item in item.NotaSalida %} 
             <h2>{{ item.NT_NDOC }}</h2>
+            <li>{{ item }}</li>
         {% endfor %}
     {% endfor %}
 
