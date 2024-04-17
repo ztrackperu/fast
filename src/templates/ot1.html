@@ -11,7 +11,10 @@
     <h1> {{ message.c_numot }}</h1>
 
     {% for item in message.DetalleOt %}
-    <li>{{ item }}</li>
+        <li>{{ item.concepto }}</li>
+        {% for item in item.NotaSalida %} 
+            <li>{{ item }}</li>
+        {% endfor %}
     {% endfor %}
 
 </body>
