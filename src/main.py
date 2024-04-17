@@ -84,6 +84,7 @@ dbname = get_database()
  
 # Recuperar una colección llamada "user_1_items" de la base de datos
 cabeot = dbname["cabeot"]
+dataot = dbname["dataot"]
  
 def consulta(data:int):
     pipeline = [
@@ -137,6 +138,14 @@ def consulta(data:int):
     ]
     return pipeline
 
+def consulta1(data:int):
+    pipeline = [
+        {"$project":{"_id":0,}},
+        #{"$match": {"c_numot": 1000028211}},  
+        {"$match": {"c_numot": data}},   
+    ]
+    return pipeline
+
 #item_details = cabeot.aggregate(pipeline)
 #item_details = cabeot.find().limit(1)
 #print("olitas")
@@ -149,7 +158,8 @@ def consulta(data:int):
     
 @app.get('/testOT/{id}')
 def get_ot(id:int):
-    item_details = cabeot.aggregate(consulta(id))
+    #item_details = cabeot.aggregate(consulta(id))
+    item_details = dataot.aggregate(consulta1(id))
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
         return JSONResponse(content=dict(item),status_code=200)     
