@@ -190,13 +190,13 @@ def get_ot1(id:int):
         return JSONResponse(content=dict(item),status_code=200)     
     
 @app.get('/testOT3/{id}')
-def get_ot2(id:int):
+def get_ot2(id:int,request :Request):
     item_details = cabeot.aggregate(consulta(id))
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
         #return JSONResponse(content=dict(item),status_code=200)  
-        #return templates.TemplateResponse('ot1.html',{ 'message':item})
-        return datosOT(item)
+        return templates.TemplateResponse('ot1.html',{ 'request':request,'message':item})
+        #return datosOT(item)
 
 @app.get("/datosOT",tags=['Home'])
 def datosOT(request :Request,item :object):
