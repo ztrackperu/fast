@@ -301,6 +301,19 @@ def ListaUnidadMedida():
     for item in item_details :
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
+dettabla = dbname["dettabla"]
+
+@app.get('/ListaSolicitanteOT')
+def ListaSolicitanteOT():
+    pip = [
+        {"$match": {"c_codtab": "UOT","C_ESTADO":"1","c_tipitm":"S"}},  
+        {"$project":{"_id":0,"c_numitm":1,"c_desitm":1}},        
+    ]
+    item_details = dettabla.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)
  
 
 
