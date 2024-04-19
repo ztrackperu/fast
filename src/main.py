@@ -318,7 +318,7 @@ def ListaSolicitanteOT():
 @app.get('/ListaSupervisadoOT')
 def ListaSupervisadoOT():
     pip = [
-        {"$match": {"C_CODTAB": "UOT","C_ESTADO":1,"C_TIPITM":"U"}},  
+        {"$match": {"C_CODTAB": "UOT","C_ESTADO":1,"C_ABRITM":"U"}},  
         {"$project":{"_id":0,"C_NUMITM":1,"C_DESITM":1}},        
     ]
     item_details = dettabla.aggregate(pip)
