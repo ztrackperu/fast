@@ -303,6 +303,7 @@ def ListaUnidadMedida():
     return JSONResponse(content=content1,status_code=200)
 dettabla = dbname["dettabla"] 
 tab_pago = dbname["tab_pago"] 
+conceptos_ot = dbname["conceptos_ot"] 
 @app.get('/ListaSolicitanteOT')
 def ListaSolicitanteOT():
     pip = [
@@ -351,7 +352,18 @@ def ListaPlazoM():
     for item in item_details :
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
- 
+
+@app.get('/ListaConceptosOT')
+def ListaConceptosOT():
+    pip = [
+        {"$match": {"estado": 1}},  
+        {"$sort":{"descripcion":1}}        
+    ]
+    item_details = conceptos_ot.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)
 
 
  
