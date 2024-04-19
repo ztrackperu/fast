@@ -418,7 +418,7 @@ def BuscarNotmae(id:int):
     content1=[]
     for item in item_details :
         content1.append(item)
-        return JSONResponse(content=content1,status_code=200)   
+    return JSONResponse(content=content1,status_code=200)   
     
 @app.get('/notmov/{id1}')
 def BuscarNotmov(id1:str):
