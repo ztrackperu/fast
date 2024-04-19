@@ -297,8 +297,10 @@ def ListaUnidadMedida():
         {"$project":{"_id":0,"TU_CODI":1,"TU_DESC":1}},
     ]
     item_details = tab_unid.aggregate(pip)
+    content1=[]
     for item in item_details :
-        return JSONResponse(content=dict(item),status_code=200)
+        content1.append(item)
+    return JSONResponse(content=dict(content1),status_code=200)
  
 
 
