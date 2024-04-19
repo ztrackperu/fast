@@ -405,4 +405,32 @@ def BuscarDetaOT(id:int):
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)   
 
+notmae = dbname["notmae"]
+notmov = dbname["notmov"]
+
+@app.get('/notmae/{id}')
+def BuscarNotmae(id:int):
+    pip = [
+        {"$match": {"c_NumOT": id}},  
+        {"$project":{"_id":0,}}        
+    ]
+    item_details = notmae.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+        return JSONResponse(content=content1,status_code=200)   
+    
+@app.get('/notmov/{id}')
+def BuscarNotmov(id:str):
+    pip = [
+        {"$match": {"NT_NDOC": id}},  
+        {"$project":{"_id":0,}}        
+    ]
+    item_details = notmov.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)   
+
+
  
