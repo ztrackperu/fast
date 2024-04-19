@@ -314,6 +314,21 @@ def ListaSolicitanteOT():
     for item in item_details :
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
+
+@app.get('/ListaSupervisadoOT')
+def ListaSupervisadoOT():
+    pip = [
+        {"$match": {"C_CODTAB": "UOT","C_ESTADO":1,"C_TIPITM":"U"}},  
+        {"$project":{"_id":0,"C_NUMITM":1,"C_DESITM":1}},        
+    ]
+    item_details = dettabla.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)
+ 
+
+
  
 
 
