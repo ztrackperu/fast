@@ -301,8 +301,8 @@ def ListaUnidadMedida():
     for item in item_details :
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
-dettabla = dbname["dettabla"]
-
+dettabla = dbname["dettabla"] 
+tab_pago = dbname["tab_pago"] 
 @app.get('/ListaSolicitanteOT')
 def ListaSolicitanteOT():
     pip = [
@@ -334,6 +334,19 @@ def ListaFormaPagoM():
         {"$project":{"_id":0,"C_NUMITM":1,"C_DESITM":1}},        
     ]
     item_details = dettabla.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)
+
+@app.get('/ListaPlazoM')
+def ListaPlazoM():
+    pip = [
+        {"$match": {"TP_ESTA": "1"}},  
+        {"$project":{"_id":0,"TP_CODI":1,"TP_DESC":1}},
+        {"$sort":{"TP_DESC":1}}        
+    ]
+    item_details = tab_pago.aggregate(pip)
     content1=[]
     for item in item_details :
         content1.append(item)
