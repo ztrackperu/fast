@@ -382,7 +382,12 @@ def ListaTecnicoOT():
 
 @app.get('/cabeot/{id}')
 def cabeot(id:int):
-    item_details = cabeot.aggregate(consulta(id))
+    pip = [
+        {"$match": {"c_numot": id}},  
+        {"$project":{"_id":0,}},        
+
+    ]
+    item_details = cabeot.aggregate(pip)
     for item in item_details :
         #return JSONResponse(content=item.model_dump(),status_code=200)
         return JSONResponse(content=dict(item),status_code=200)   
