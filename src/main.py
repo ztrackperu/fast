@@ -103,6 +103,7 @@ dbname = get_database()
 # Recuperar una colección llamada "user_1_items" de la base de datos
 cabeot = dbname["cabeot"]
 dataot = dbname["dataot"]
+tab_unid = dbname["tab_unid"]
  
 def consulta(data:int):
     pipeline = [
@@ -287,6 +288,15 @@ def get_ot3(id:int,request :Request):
 @app.get('/ot/{id}')
 def get_ot4(id:int,request :Request):
     item_details = cabeot.aggregate(consulta2(id))
+    for item in item_details :
+      return JSONResponse(content=dict(item),status_code=200) 
+
+@app.get('/ListaUnidadMedida')
+def get_ot4(id:int):
+    pip = [
+        {"$project":{"_id":0,"TU_CODI":1,"TU_DESC":1}},
+    ]
+    item_details = tab_unid.aggregate(pip)
     for item in item_details :
       return JSONResponse(content=dict(item),status_code=200) 
 
