@@ -392,5 +392,17 @@ def BuscarCabeOT(id:int):
     for item in item_details :
         content1.append(item)
         return JSONResponse(content=content1,status_code=200)   
+    
+@app.get('/detaot/{id}')
+def BuscarDetaOT(id:int):
+    pip = [
+        {"$match": {"c_numot": id}},  
+        {"$project":{"_id":0,}}        
+    ]
+    item_details = detaot.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+    return JSONResponse(content=content1,status_code=200)   
 
  
