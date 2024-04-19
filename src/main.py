@@ -299,7 +299,7 @@ def ListaUnidadMedida():
     content1=[]
     item_details = tab_unid.aggregate(pip)
     for item in item_details :
-        content1.append(item)
-        return JSONResponse(content=content1,status_code=200) 
+        #content1.append(item)
+        return JSONResponse(content=item,status_code=200) 
 
 
