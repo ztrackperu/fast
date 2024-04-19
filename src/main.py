@@ -290,13 +290,13 @@ def get_ot4(id:int,request :Request):
     item_details = cabeot.aggregate(consulta2(id))
     for item in item_details :
       return JSONResponse(content=dict(item),status_code=200) 
-
+#movies:TabList[Movie] =[]
 @app.get('/ListaUnidadMedida')
 def ListaUnidadMedida():
     pip = [
         {"$project":{"_id":0,"tu_codi":1,"tu_desc":1}},
     ]
-    content1=[]
+    #content1=[]
     item_details = tab_unid.aggregate(pip)
     for item in item_details :
         #content1.append(item)
