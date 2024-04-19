@@ -342,7 +342,7 @@ def ListaFormaPagoM():
 @app.get('/ListaPlazoM')
 def ListaPlazoM():
     pip = [
-        {"$match": {"TP_ESTA": "1"}},  
+        {"$match": {"TP_ESTA": 1}},  
         {"$project":{"_id":0,"TP_CODI":1,"TP_DESC":1}},
         {"$sort":{"TP_DESC":1}}        
     ]
