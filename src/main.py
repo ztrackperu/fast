@@ -306,7 +306,7 @@ dettabla = dbname["dettabla"]
 @app.get('/ListaSolicitanteOT')
 def ListaSolicitanteOT():
     pip = [
-        {"$match": {"C_CODTAB": "UOT","C_ESTADO":"1"}},  
+        {"$match": {"C_CODTAB": "UOT","C_ESTADO":1}},  
         {"$project":{"_id":0,"C_NUMITM":1,"C_DESITM":1}},        
     ]
     item_details = dettabla.aggregate(pip)
