@@ -102,6 +102,7 @@ dbname = get_database()
  
 # Recuperar una colección llamada "user_1_items" de la base de datos
 cabeot = dbname["cabeot"]
+detaot = dbname["detaot"]
 dataot = dbname["dataot"]
 tab_unid = dbname["tab_unid"]
  
@@ -379,6 +380,12 @@ def ListaTecnicoOT():
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
 
+@app.get('/cabeot/{id}')
+def cabeot(id:int):
+    item_details = cabeot.aggregate(consulta(id))
+    for item in item_details :
+        #return JSONResponse(content=item.model_dump(),status_code=200)
+        return JSONResponse(content=dict(item),status_code=200)   
 
  
 
