@@ -294,10 +294,11 @@ def get_ot4(id:int,request :Request):
 @app.get('/ListaUnidadMedida')
 def ListaUnidadMedida():
     pip = [
-        {"$project":{"_id":0,"TU_CODI":1,"TU_DESC":1}},
+        {"$project":{"_id":0,"tu_codi":1,"tu_desc":1}},
     ]
     item_details = tab_unid.aggregate(pip)
-    for item in item_details :
-      return JSONResponse(content=dict(item),status_code=200) 
+    #for item in item_details :
+      
+    return JSONResponse(content=dict(item_details),status_code=200) 
 
 
