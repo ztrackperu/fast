@@ -420,10 +420,10 @@ def BuscarNotmae(id:int):
         content1.append(item)
         return JSONResponse(content=content1,status_code=200)   
     
-@app.get('/notmov/{id}')
-def BuscarNotmov(id:str):
+@app.get('/notmov/{id1}')
+def BuscarNotmov(id1:str):
     pip = [
-        {"$match": {"NT_NDOC": id}},  
+        {"$match": {"NT_NDOC": id1}},  
         {"$project":{"_id":0,}}        
     ]
     item_details = notmov.aggregate(pip)
