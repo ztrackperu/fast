@@ -108,9 +108,10 @@ tab_unid = dbname["tab_unid"]
  
 def consulta(data:int):
     pipeline = [
+        {"$match": {"c_numot": data}}, 
         {"$project":{"_id":0,}},
         #{"$match": {"c_numot": 1000028211}},  
-        {"$match": {"c_numot": data}}, 
+        
         {
             "$lookup": {
                 "from": 'detaot',
@@ -388,9 +389,10 @@ def cabeot(id:int):
 
     ]
     item_details = cabeot.aggregate(pip)
+    content1=[]
     for item in item_details :
-        #return JSONResponse(content=item.model_dump(),status_code=200)
-        return JSONResponse(content=dict(item),status_code=200)   
+        content1.append(item)
+        return JSONResponse(content=content1,status_code=200)   
 
  
 
