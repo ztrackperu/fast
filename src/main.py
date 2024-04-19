@@ -357,7 +357,8 @@ def ListaPlazoM():
 def ListaConceptosOT():
     pip = [
         {"$match": {"estado": 1}},  
-        #{"$sort":{"descripcion":1}}        
+        {"$project":{"_id":0,}},
+        {"$sort":{"descripcion":1}}        
     ]
     item_details = conceptos_ot.aggregate(pip)
     content1=[]
