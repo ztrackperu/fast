@@ -292,7 +292,7 @@ def get_ot4(id:int,request :Request):
       return JSONResponse(content=dict(item),status_code=200) 
 
 @app.get('/ListaUnidadMedida')
-def get_ot4(id:int):
+def ListaUnidadMedida():
     pip = [
         {"$project":{"_id":0,"TU_CODI":1,"TU_DESC":1}},
     ]
