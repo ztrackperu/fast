@@ -371,7 +371,7 @@ def ListaConceptosOT():
 @app.get('/ListaConceptosOT/{id}')
 def ListaConceptosOT1(id:int):
     pip = [
-        {"$match": {"estado": 1,"codigo":1}},  
+        {"$match": {"estado": 1,"codigo":id}},  
         {"$project":{"_id":0,}},       
     ]
     item_details = conceptos_ot.aggregate(pip)
