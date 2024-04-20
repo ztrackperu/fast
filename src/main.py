@@ -368,6 +368,19 @@ def ListaConceptosOT():
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
 
+@app.get('/ListaConceptosOT/{id}')
+def ListaConceptosOT1(id:int):
+    pip = [
+        {"$match": {"estado": 1,"codigo":1}},  
+        {"$project":{"_id":0,}},       
+    ]
+    item_details = cabeot.aggregate(pip)
+    content1=[]
+    for item in item_details :
+        content1.append(item)
+        return JSONResponse(content=content1,status_code=200)  
+
+
 @app.get('/ListaTecnicoOT')
 def ListaTecnicoOT():
     pip = [
@@ -427,21 +440,6 @@ def BuscarNotmov(id1:str):
         {"$project":{"_id":0,}}        
     ]
     item_details = notmov.aggregate(pip)
-    content1=[]
-    for item in item_details :
-        content1.append(item)
-    return JSONResponse(content=content1,status_code=200)   
-
-conceptos_ot = dbname["conceptos_ot"]
-
-
-@app.get('/conceptos_ot')
-def Lconceptos_ot():
-    pip = [
-        {"$match": {"estado": 1}},  
-        {"$project":{"_id":0,}}        
-    ]
-    item_details = conceptos_ot.aggregate(pip)
     content1=[]
     for item in item_details :
         content1.append(item)
