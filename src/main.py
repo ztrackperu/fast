@@ -374,7 +374,7 @@ def ListaConceptosOT1(id:int):
         {"$match": {"estado": 1,"codigo":1}},  
         {"$project":{"_id":0,}},       
     ]
-    item_details = cabeot.aggregate(pip)
+    item_details = conceptos_ot.aggregate(pip)
     content1=[]
     for item in item_details :
         content1.append(item)
