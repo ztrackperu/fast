@@ -36,5 +36,5 @@ def create_model(movie:ConceptoCreate):
 
     #movies.append(movie)
     #content = [movie.model_dump() for movie in movies]
-    item_details = conceptos_ot.insertOne(movie)
+    item_details = conceptos_ot.insert_one(movie)
     return JSONResponse(content=item_details,status_code=201)
