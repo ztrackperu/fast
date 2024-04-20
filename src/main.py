@@ -3,6 +3,8 @@ from fastapi.requests import Request
 from fastapi.responses import PlainTextResponse,FileResponse,Response,JSONResponse
 #importamos la ruta de movie
 from src.routers.movie_router import movie_router
+from src.routers.concepto_router import concepto_router
+
 from src.utils.http_error_handler import HTTPErrorHandler
 from typing import Annotated
 from src.routers.user_db import router_user
@@ -93,6 +95,7 @@ def get_file():
     return FileResponse('file.pdf')
 
 app.include_router(prefix='/movies',router=movie_router)
+app.include_router(prefix='/ConceptosOT',router=concepto_router)
 
 app.include_router(prefix='/usersDb',router=router_user)
 
@@ -355,28 +358,6 @@ def ListaPlazoM():
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)
 
-@app.get('/ListaConceptosOT')
-def ListaConceptosOT():
-    pip = [
-        {"$match": {"estado": 1}},  
-        {"$project":{"_id":0,}},
-        {"$sort":{"descripcion":1}}        
-    ]
-    item_details = conceptos_ot.aggregate(pip)
-    content1=[]
-    for item in item_details :
-        content1.append(item)
-    return JSONResponse(content=content1,status_code=200)
-
-@app.get('/ListaConceptosOT/{id}')
-def ListaConceptosOT1(id:int):
-    pip = [
-        {"$match": {"estado": 1,"codigo":id}},  
-        {"$project":{"_id":0,}},       
-    ]
-    item_details = conceptos_ot.aggregate(pip)
-    for item in item_details :
-        return JSONResponse(content=item,status_code=200)  
 
 
 @app.get('/ListaTecnicoOT')
