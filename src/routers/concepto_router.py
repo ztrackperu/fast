@@ -36,5 +36,6 @@ def create_model(movie:ConceptoCreate):
     user_dict = dict(movie)
     #movies.append(movie) 
     #content = [movie.model_dump() for movie in movies]
-    item_details = conceptos_ot.monTest.insert_one(user_dict)
-    return JSONResponse(content=item_details,status_code=201)
+    item_details = conceptos_ot.insert_one(user_dict)
+    return " todo ok "
+    #return JSONResponse(content=item_details,status_code=201)
