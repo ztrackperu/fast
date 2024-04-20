@@ -308,7 +308,6 @@ def ListaUnidadMedida():
     return JSONResponse(content=content1,status_code=200)
 dettabla = dbname["dettabla"] 
 tab_pago = dbname["tab_pago"] 
-conceptos_ot = dbname["conceptos_ot"] 
 @app.get('/ListaSolicitanteOT')
 def ListaSolicitanteOT():
     pip = [
