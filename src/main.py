@@ -423,7 +423,7 @@ def BuscarNotmov(id1:str):
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)   
 
-OFICIALUNION= dbname["OFICIALUNION"]
+UNIONOFICIAL= dbname["UNIONOFICIAL"]
 @app.get('/otok/{id}')
 def get_ot5(id:int,request :Request):
     pip = [
@@ -431,7 +431,7 @@ def get_ot5(id:int,request :Request):
         {"$project":{"_id":0,}}        
     ]
     print(id)
-    item_details = OFICIALUNION.aggregate(pip)
+    item_details = UNIONOFICIAL.aggregate(pip)
     print(pip)
     for item in item_details :
       print(item)
