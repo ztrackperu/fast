@@ -430,6 +430,7 @@ def get_ot5(id:int,request :Request):
         {"$match": {"c_numot": id}}, 
         {"$project":{"_id":0,}}        
     ]
+    print(id)
     item_details = OFICIALUNION.aggregate(pip)
     print(item_details)
     for item in item_details :
