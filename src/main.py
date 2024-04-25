@@ -422,3 +422,16 @@ def BuscarNotmov(id1:str):
     for item in item_details :
         content1.append(item)
     return JSONResponse(content=content1,status_code=200)   
+
+OFICIALUNION= dbname["OFICIALUNION"]
+@app.get('/otok/{id}')
+def get_ot5(id:int,request :Request):
+    pip = [
+        {"$match": {"c_numot": id}}, 
+        {"$project":{"_id":0,}}        
+    ]
+    item_details = OFICIALUNION.aggregate(pip)
+    print(item_details)
+    for item in item_details :
+      return JSONResponse(content=dict(item),status_code=200) 
+#movies:TabList[Movie] =[]
