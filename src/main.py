@@ -435,7 +435,7 @@ def get_ot5(id:int,request :Request):
     print(pip)
     for item in item_details :
       print(item)
-      #return JSONResponse(content=dict(item),status_code=200) 
-      return JSONResponse(content=item,status_code=200) 
+      return JSONResponse(content=dict(item),status_code=200) 
+      #return JSONResponse(content=item,status_code=200) 
 
 #movies:TabList[Movie] =[]
