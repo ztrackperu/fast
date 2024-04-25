@@ -432,7 +432,8 @@ def get_ot5(id:int,request :Request):
     ]
     print(id)
     item_details = OFICIALUNION.aggregate(pip)
-    print(item_details)
+    print(pip)
     for item in item_details :
+      print(item)
       return JSONResponse(content=dict(item),status_code=200) 
 #movies:TabList[Movie] =[]
