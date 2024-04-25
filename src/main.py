@@ -31,7 +31,7 @@ origins1 = ["*"]
 #def dependency2():
     #print("Global Dependeny2")
 
-app = FastAPI(dependencies=[Depends(dependency1),Depends(dependency2)])
+#app = FastAPI(dependencies=[Depends(dependency1),Depends(dependency2)])
 
 app.add_middleware(
     CORSMiddleware,
