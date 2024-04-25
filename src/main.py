@@ -430,11 +430,11 @@ def get_ot5(id:int,request :Request):
         {"$match": {"c_numot": id}}, 
         {"$project":{"_id":0,}}        
     ]
-    print(id)
+    #print(id)
     item_details = UNIONOFICIAL.aggregate(pip)
-    print(pip)
+    #print(pip)
     for item in item_details :
-      print(item)
+      #print(item)
       return JSONResponse(content=dict(item),status_code=200) 
       #return JSONResponse(content=item,status_code=200) 
 
